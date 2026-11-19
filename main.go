@@ -8,7 +8,7 @@ import (
 
 func main() {
 
-	text := `orem ipsum dolor sit amet, consectetur adipiscing elit. Nulla hendrerit eros eu ipsum blandit condimentum. Proin at varius lectus. In tristique purus a odio posuere, eget volutpat urna interdum. Curabitur non leo urna. Nam augue tortor, pulvinar quis ligula in, lacinia lobortis odio. Donec vel sodales sapien, ut vehicula sem. Vestibulum lacinia mattis libero, ut eleifend nibh mollis et. Aliquam vitae eros arcu.`
+	text := `The Green elephANt knew the truth about The Red Otter,but did nOt tell Anyone Else.`
 
 	// lowercase
 	lower := strings.ToLower(text)
@@ -17,15 +17,20 @@ func main() {
 	splitFunc := func(r rune) bool {
 		return unicode.IsSpace(r) || r == ',' || r == '.' || r == ';'
 	}
-	// returns an array
+	// returns an slice
 	rpunc := strings.FieldsFunc(lower, splitFunc)
 	fmt.Println(rpunc)
 
+	// count the total number of words
+	totalWords := len(rpunc)
+	fmt.Println("Total number of words:", totalWords)
+
+	// create an empty map then loop over it to count occurrences of each word
+	wordMap := make(map[string]int)
+
+	for _, word := range rpunc {
+		wordMap[word]++
+	}
+
+	fmt.Println(wordMap)
 }
-
-// - Hardcode a paragraph of text in your program.
-// - Lowercase it, split it into words (`strings.Fields`), and strip punctuation (`strings.Trim`).
-// - Count each word’s frequency in a `map[string]int`.
-// - Print every word with its count.
-
-// **Done when:** counts are correct for a paragraph you verified by hand.
